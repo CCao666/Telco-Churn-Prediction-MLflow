@@ -140,7 +140,7 @@ AUC was used to confirm separability, while F1 served as the primary selection c
 Rather than assuming the default 0.5 cutoff is optimal, 
 predicted probabilities were evaluated across thresholds to identify the best operating point.
 
-The selected threshold (~0.5) maximized F1 under class-weighted training, 
+The selected threshold (0.51) maximized F1 under class-weighted training, 
 confirming that the model’s optimal decision boundary aligns closely with the default midpoint.
 
 
