@@ -1,0 +1,23 @@
+artifact_path: /Users/chunyangcao/Desktop/Projects/Telco_Chrun_MLFlow/mlruns/2/models/m-2ef1953b680841c58dee4323c0681051/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.10.19
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.7.2
+    skops_trusted_types: null
+mlflow_version: 3.9.0
+model_id: m-2ef1953b680841c58dee4323c0681051
+model_size_bytes: 177665
+model_uuid: m-2ef1953b680841c58dee4323c0681051
+prompts: null
+run_id: 949b16935b5f4bd18327355b27eb1c43
+utc_time_created: '2026-02-25 02:57:08.463601'
