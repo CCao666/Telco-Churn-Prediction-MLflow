@@ -42,4 +42,5 @@ The repository is organized to reflect a clean, production-oriented machine lear
 ├── README.md                     # Project documentation
 └── .gitignore                    # Ignore artifacts and cache files
 
+```
 This structure separates experimentation, model training, tracking, and production artifacts — mirroring how ML systems are organized in real-world environments.
