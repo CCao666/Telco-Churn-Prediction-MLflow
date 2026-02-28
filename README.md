@@ -150,3 +150,106 @@ Churn in this dataset is primarily driven by:
 - Certain payment behaviors
 
 These insights guide model design and threshold selection decisions.
+
+## 🔁 Model Lifecycle
+
+This project follows a structured, production-style ML lifecycle rather than a single-notebook experimentation approach.
+
+
+### 1️⃣ Baseline & Multi-Model Comparison
+
+Multiple model families were evaluated under a consistent preprocessing pipeline:
+
+- Logistic Regression  
+- Random Forest  
+- Support Vector Machine (SVM)  
+- XGBoost  
+
+All experiments were tracked using **MLflow**, logging:
+
+- Hyperparameters  
+- AUC-ROC  
+- F1 Score  
+- Precision  
+- Recall  
+- Accuracy  
+
+Result:
+XGBoost consistently demonstrated superior ranking ability (AUC) and better recall–precision balance.
+
+
+### 2️⃣ Class-Weighted Training Strategy
+
+Given the imbalanced nature of the dataset (~26.5% churn rate), models were trained with class imbalance adjustments:
+
+- `scale_pos_weight` for XGBoost  
+- `class_weight='balanced'` for LR, RF, and SVM  
+
+This ensures churn misclassification (false negatives) carries higher penalty during training.
+
+
+### 3️⃣ Hyperparameter Optimization
+
+After identifying XGBoost as the strongest model family, a fine-grained hyperparameter search was conducted:
+
+- `n_estimators`
+- `max_depth`
+- `learning_rate`
+- `subsample`
+
+All runs were logged under a dedicated MLflow experiment, enabling reproducible comparison and ranking.
+
+
+### 4️⃣ Threshold Optimization
+
+Instead of relying on the default 0.5 classification threshold, the decision boundary was tuned based on predicted probabilities.
+
+The final optimized threshold is:
+
+**0.51**
+
+This threshold was selected to balance:
+
+- High recall (protect revenue by capturing churners)
+- Controlled precision (manage retention campaign cost)
+
+
+### 5️⃣ Model Registry & Governance
+
+The best-performing run across experiments was automatically identified and registered into the MLflow Model Registry.
+
+This simulates real-world model governance, including:
+
+- Version tracking  
+- Candidate tagging  
+- Experiment lineage traceability  
+
+
+### 6️⃣ Production Freeze
+
+After reviewing:
+
+- Confusion matrix tradeoffs  
+- Business impact of false positives vs false negatives  
+- Stability of evaluation metrics  
+
+A finalized model can be exported via:
+
+`src/save_best_model.py`
+
+The frozen production artifact is stored under:
+
+`models/`
+
+This step represents deployment readiness after business validation.
+
+
+### 🔄 End-to-End Flow
+
+EDA  
+→ Preprocessing  
+→ Multi-Model Evaluation  
+→ Hyperparameter Optimization  
+→ Threshold Tuning  
+→ Registry  
+→ Production Export
