@@ -159,7 +159,7 @@ This project follows a structured ML workflow beyond notebook experimentation.
 Multiple model families (LR, RF, SVM, XGBoost) were evaluated under a unified preprocessing pipeline.  
 All experiments were tracked using MLflow, logging hyperparameters and key metrics (AUC, F1, Precision, Recall).  
 **XGBoost consistently delivered the best performance.**
-![Model Comparison Experiment](assets/mlflow_model_comparison.png)
+![Model Comparison Experiment](assets/ModelComparison_Experiment.jpg)
 
 
 ### 2️⃣ Imbalance-Aware Training  
