@@ -1,0 +1,13 @@
+# MLflow artifacts
+mlruns/
+mlflow.db
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Jupyter
+.ipynb_checkpoints/
+
+# macOS
+.DS_Store
