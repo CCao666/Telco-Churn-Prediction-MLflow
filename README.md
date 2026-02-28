@@ -208,6 +208,9 @@ while **maximum F1 under class-weighted training was used as the primary model s
 ### 4️⃣ Threshold Tuning  
 The final decision threshold was optimized to **0.51**, balancing recall (revenue protection) and precision (intervention cost control).
 
+![Threshold Adjustment](assets/OptimizedThreshold.png)
+
+
 ### 5️⃣ Model Registry & Production Export  
 The best run was registered in MLflow for version tracking.  
 After business validation, the finalized production model can be exported via:
