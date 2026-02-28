@@ -44,3 +44,118 @@ The repository is organized to reflect a clean, production-oriented machine lear
 
 ```
 This structure separates experimentation, model training, tracking, and production artifacts — mirroring how ML systems are organized in real-world environments.
+
+## 📊 Dataset & Problem Framing
+
+This project uses the **Telco Customer Churn dataset**, where each row represents a telecom customer and the target variable indicates whether the customer churned.
+
+### Dataset Overview
+
+- ~7,000 customers
+- Binary classification problem
+- Churn rate: **~26.5%**
+- Mix of numerical and categorical features
+- Behavioral and billing-related attributes
+
+Because churners represent a minority class, this is an **imbalanced classification problem**.
+
+If not handled properly, models tend to over-predict the majority class (non-churn), leading to high accuracy but poor churn detection.
+
+---
+
+## ⚖️ Handling Class Imbalance
+
+To address imbalance, this project applies:
+
+- **Class weighting during training**
+  - `scale_pos_weight` for XGBoost
+  - `class_weight='balanced'` for other models
+- **Threshold tuning on predicted probabilities**
+  - Final optimized threshold: **0.51**
+
+This ensures the model prioritizes identifying churners (high recall) while controlling unnecessary intervention costs (precision tradeoff).
+
+---
+
+## 🔍 Exploratory Data Analysis (EDA) – Key Findings
+
+Based on detailed EDA (see `notebooks/EDA.ipynb`), several strong behavioral patterns emerge:
+
+### 1️⃣ Contract Type
+
+- **Month-to-Month contracts show significantly higher churn**
+- Long-term contracts (1–2 years) strongly reduce churn probability
+
+Interpretation:
+Customers with flexible contracts are less committed and more price-sensitive.
+
+---
+
+### 2️⃣ Tenure
+
+- Short-tenure customers are at much higher risk
+- Tenure shows strong negative correlation with churn
+
+Interpretation:
+Customer loyalty increases over time.
+
+---
+
+### 3️⃣ Monthly Charges
+
+- Higher monthly charges increase churn likelihood
+- Particularly strong effect within month-to-month contracts
+
+Interpretation:
+Pricing pressure drives churn in flexible subscription plans.
+
+---
+
+### 4️⃣ Service Adoption
+
+- Customers subscribing to more services churn less
+- Clear negative relationship between total services and churn probability
+
+Interpretation:
+Higher product engagement increases switching cost.
+
+---
+
+### 5️⃣ Payment Method
+
+- Electronic check users churn at significantly higher rates
+
+Interpretation:
+May reflect lower engagement or more price-sensitive segments.
+
+---
+
+### 6️⃣ Internet Service Type
+
+- Fiber optic users show elevated churn compared to DSL users
+
+Interpretation:
+Could indicate higher expectations or competitive alternatives.
+
+---
+
+### 7️⃣ Paperless Billing
+
+- Associated with slightly higher churn probability
+
+Interpretation:
+Digitally active users may be more responsive to pricing or competitor offers.
+
+---
+
+## 🎯 Summary of Behavioral Drivers
+
+Churn in this dataset is primarily driven by:
+
+- Contract flexibility
+- Short customer tenure
+- High pricing exposure
+- Low service engagement
+- Certain payment behaviors
+
+These insights guide model design and threshold selection decisions.
