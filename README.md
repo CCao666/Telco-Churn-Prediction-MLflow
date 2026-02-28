@@ -145,7 +145,6 @@ confirming that the model’s optimal decision boundary aligns closely with the 
 
 ![Threshold Adjustment](assets/OptimizedThreshold.png)
 
-
 ### 5️⃣ Model Registry & Production Export
 
 The best-performing run was registered in MLflow for version tracking and experiment lineage.
