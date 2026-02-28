@@ -153,27 +153,31 @@ These insights guide model design and threshold selection decisions.
 
 ## 🔁 Model Lifecycle
 
-This project follows a structured ML workflow beyond notebook experimentation.
+This project follows a structured ML workflow beyond simple notebook experimentation, covering model comparison, optimization, and production readiness.
 
-### 1️⃣ Model Comparison  
-Multiple model families (LR, RF, SVM, XGBoost) were evaluated under a unified preprocessing pipeline.  
-All experiments were tracked using MLflow, logging hyperparameters and key metrics (AUC, F1, Precision, Recall).  
-**XGBoost base model delivered best performance.**
+### 1️⃣ Model Comparison
 
+Multiple model families (Logistic Regression, Random Forest, SVM, XGBoost) were evaluated under a unified preprocessing pipeline.
 
+All experiments were tracked in MLflow, logging hyperparameters and key metrics (AUC, F1, Precision, Recall).
+
+**XGBoost delivered the strongest baseline performance.**
 
 ![Model Comparison Experiment](assets/ModelComparison_Experiment.jpg)
 
 
+### 2️⃣ Imbalance-Aware Training
 
-### 2️⃣ Imbalance-Aware Training  
-Given the 26.5% churn rate, models were trained with class weighting:  
+Given the 26.5% churn rate, class imbalance was addressed during training:
+
 - `scale_pos_weight` (XGBoost)  
-- `class_weight='balanced'` (others)  
+- `class_weight='balanced'` (LR, RF, SVM)  
 
-This improves churn detection by penalizing false negatives more heavily.
+This increases the penalty for misclassifying churners and improves recall.
 
-### 3️⃣ XGBoost Optimization  
+
+### 3️⃣ XGBoost Optimization
+
 A dedicated hyperparameter search refined:
 
 - `n_estimators`
@@ -181,47 +185,51 @@ A dedicated hyperparameter search refined:
 - `learning_rate`
 - `subsample`
 
-All runs were tracked in MLflow for reproducible comparison.
+All runs were logged in MLflow for reproducible comparison.
 
-![XGBoost Best Model](assets/XGBoost_Optimization_Experiment.jpg)
+![XGBoost Optimization Experiment](assets/XGBoost_Optimization_Experiment.jpg)
 
-Model selection was primarily based on **maximum F1 score**, rather than AUC alone.
+Model selection was primarily based on **maximum F1 score** rather than AUC alone.
 
-While AUC measures the model’s ranking ability across all possible thresholds, it does not reflect performance at a specific operating point.
+While AUC measures overall ranking ability, it is threshold-independent.  
+Churn intervention decisions operate at a fixed threshold, making **F1 (precision–recall balance)** a more deployment-relevant metric.
 
-In churn prediction, decisions are made using a fixed classification threshold.  
-Therefore, business impact depends on:
+AUC was used to confirm separability, while F1 served as the primary selection criterion.
 
-- **Recall** → capturing actual churners (revenue protection)  
-- **Precision** → limiting unnecessary retention cost  
 
-F1 score balances these two factors and directly evaluates performance at the chosen decision boundary.
+### 4️⃣ Threshold Tuning
 
-In contrast:
+Instead of relying on the default 0.5 cutoff, the classification threshold was optimized to:
 
-- A model can have high AUC but poor precision–recall balance at the deployment threshold.
-- AUC evaluates ranking quality, not intervention cost tradeoffs.
+**0.51**
 
-For this reason, AUC was used to assess overall separability,  
-while **maximum F1 under class-weighted training was used as the primary model selection criterion.**
+This operating point balances:
 
-### 4️⃣ Threshold Tuning  
-The final decision threshold was optimized to **0.51**, balancing recall (revenue protection) and precision (intervention cost control).
+- High recall → revenue protection  
+- Controlled precision → retention cost management  
 
 ![Threshold Adjustment](assets/OptimizedThreshold.png)
 
 
-### 5️⃣ Model Registry & Production Export  
-The best run was registered in MLflow for version tracking.  
+### 5️⃣ Model Registry & Production Export
+
+The best-performing run was registered in MLflow for version tracking and experiment lineage.
+
 After business validation, the finalized production model can be exported via:
 
 `src/save_best_model.py`
 
-Stored under:
+The deployment-ready artifact is stored under:
 
 `models/`
 
 
 ### 🔄 Workflow Summary
 
-EDA → Preprocessing → Model Comparison → Optimization → Threshold Tuning → Registry → Production Export
+EDA  
+→ Preprocessing  
+→ Multi-Model Comparison  
+→ Hyperparameter Optimization  
+→ Threshold Tuning  
+→ Registry  
+→ Production Export
