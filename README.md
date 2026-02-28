@@ -143,7 +143,6 @@ predicted probabilities were evaluated across thresholds to identify the best op
 The selected threshold (~0.5) maximized F1 under class-weighted training, 
 confirming that the model’s optimal decision boundary aligns closely with the default midpoint.
 
-![Threshold Adjustment](assets/OptimizedThreshold.png)
 
 ### 5️⃣ Model Registry & Production Export
 
