@@ -22,10 +22,10 @@ The repository is organized to reflect a clean, production-oriented machine lear
 ```text
 .
 ├── data/
-│   └── raw_data.csv              # Raw Telco churn dataset
+│   └── raw_data.csv              # Original Telco Churn dataset
 │
 ├── notebooks/
-│   └── EDA.ipynb                 # Exploratory data analysis and insights
+│   └── EDA.ipynb                 # Exploratory data analysis and business insights
 │
 ├── src/
 │   ├── preprocess.py             # Data cleaning, encoding, scaling, train/test split
@@ -33,12 +33,11 @@ The repository is organized to reflect a clean, production-oriented machine lear
 │   ├── hpo.py                    # Multi-model hyperparameter sweep
 │   ├── xgb_finetune.py           # Fine-grained XGBoost hyperparameter tuning
 │   ├── register_model.py         # Automated best-model registration to MLflow Registry
-│   └── save_best_model.py        # Business-driven export of selected production model    
+│   └── save_best_model.py        # Export finalized production model after business validation
 │
-├── mlruns/                       # MLflow experiment artifacts (ignored by Git)
-├── mlflow.db                     # MLflow tracking database (ignored by Git)
+├── models/                       # Stored production-ready model artifacts (.pkl)
 │
-├── conda.yaml                    # Reproducible conda environment
 ├── MLProject                     # MLflow project definition
+├── conda.yaml                    # Reproducible environment specification
 ├── README.md                     # Project documentation
-└── .gitignore                    # Excludes artifacts, cache, and local files
+└── .gitignore                    # Ignore artifacts and cache files
