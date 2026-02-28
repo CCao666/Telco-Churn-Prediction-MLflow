@@ -183,6 +183,28 @@ A dedicated hyperparameter search refined:
 
 All runs were tracked in MLflow for reproducible comparison.
 
+!XGBoost Best Model](assets/XGBoost_Optimization_Experiment.jpg)
+
+Model selection was primarily based on **maximum F1 score**, rather than AUC alone.
+
+While AUC measures the model’s ranking ability across all possible thresholds, it does not reflect performance at a specific operating point.
+
+In churn prediction, decisions are made using a fixed classification threshold.  
+Therefore, business impact depends on:
+
+- **Recall** → capturing actual churners (revenue protection)  
+- **Precision** → limiting unnecessary retention cost  
+
+F1 score balances these two factors and directly evaluates performance at the chosen decision boundary.
+
+In contrast:
+
+- A model can have high AUC but poor precision–recall balance at the deployment threshold.
+- AUC evaluates ranking quality, not intervention cost tradeoffs.
+
+For this reason, AUC was used to assess overall separability,  
+while **maximum F1 under class-weighted training was used as the primary model selection criterion.**
+
 ### 4️⃣ Threshold Tuning  
 The final decision threshold was optimized to **0.51**, balancing recall (revenue protection) and precision (intervention cost control).
 
