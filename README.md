@@ -183,7 +183,7 @@ A dedicated hyperparameter search refined:
 
 All runs were tracked in MLflow for reproducible comparison.
 
-!XGBoost Best Model](assets/XGBoost_Optimization_Experiment.jpg)
+![XGBoost Best Model](assets/XGBoost_Optimization_Experiment.jpg)
 
 Model selection was primarily based on **maximum F1 score**, rather than AUC alone.
 
