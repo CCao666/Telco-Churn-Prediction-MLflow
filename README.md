@@ -1,36 +1,16 @@
-# 🎯 Project Goal
+## 🎯 Project Goal
 
-def build_production_churn_pipeline():
+The objective of this project is to build a production-style churn prediction system that:
 
-    """
-    Objective:
-        Develop a production-style churn prediction system
-        with structured ML lifecycle and experiment tracking.
-    """
+- Identifies customers at high risk of cancellation  
+- Handles class imbalance in a principled way  
+- Compares multiple model families  
+- Tracks experiments using MLflow  
+- Selects and registers the best-performing model  
+- Optimizes decision thresholds for business tradeoffs  
 
-    goals = [
-        "Identify high-risk customers likely to churn",
-        "Handle class imbalance via class weighting",
-        "Compare multiple model families (LR, RF, SVM, XGBoost)",
-        "Track experiments using MLflow",
-        "Select and register the best-performing model",
-        "Optimize decision threshold for business tradeoffs"
-    ]
+Unlike a simple notebook-based modeling exercise, this project demonstrates a structured ML lifecycle workflow:
 
-    workflow = [
-        "EDA",
-        "Preprocessing",
-        "Multi-model comparison",
-        "Hyperparameter tuning",
-        "Model selection",
-        "Model Registry"
-    ]
+**EDA → Preprocessing → Multi-model comparison → Hyperparameter tuning → Model selection → Registry**
 
-    final_model = {
-        "model_type": "XGBoost",
-        "strategy": "class-weighted training (scale_pos_weight)",
-        "threshold": 0.51,
-        "objective": "Balance churn detection and intervention cost"
-    }
-
-    return goals, workflow, final_model
+The final production candidate is an optimized, class-weighted **XGBoost** model, tuned to balance churn detection and intervention cost.
