@@ -233,3 +233,60 @@ EDA
 → Threshold Tuning  
 → Registry  
 → Production Export
+
+## 📊 Final Model Performance & Business Interpretation
+
+The best-performing XGBoost model (class-weighted, threshold = 0.51) achieved:
+
+- **AUC:** 0.845  
+- **F1 Score:** 0.637  
+- **Accuracy:** ~0.79  
+- **Recall:** ~0.81  
+- **Precision:** ~0.53  
+
+### Confusion Matrix at Threshold 0.51
+
+![Confusion Matrix](assets/ConfusionMatrix.png)
+
+|                | Predicted Stay | Predicted Churn |
+|----------------|---------------|----------------|
+| **Actual Stay**   | 762 (TN)       | 273 (FP)        |
+| **Actual Churn**  | 71 (FN)        | 303 (TP)        |
+
+---
+
+### 📈 Metric Interpretation (Business Perspective)
+
+**True Positives (303)**  
+Correctly identified churners.  
+→ Enables targeted retention campaigns and revenue protection.
+
+**True Negatives (762)**  
+Correctly identified loyal customers.  
+→ Avoids unnecessary discount or outreach cost.
+
+**False Positives (273)**  
+Customers predicted to churn but who stayed.  
+→ Increases intervention cost, but may still strengthen engagement and long-term loyalty.
+
+**False Negatives (71)**  
+Missed churners.  
+→ Direct revenue loss and missed retention opportunity.
+
+---
+
+### 🎯 Why These Metrics Matter
+
+- **Recall (~0.81)** ensures most churners are captured, protecting revenue.
+- **Precision (~0.53)** controls over-spending on unnecessary retention efforts.
+- **F1 Score (0.637)** balances these two competing objectives.
+- **AUC (0.845)** confirms strong overall ranking ability.
+
+Because churn intervention operates at a fixed threshold, evaluation focuses on precision–recall tradeoffs rather than accuracy alone.
+
+---
+
+### 🔎 Business Takeaway
+
+The model captures over 80% of churners while maintaining manageable intervention cost.  
+This makes it suitable for deployment in retention targeting workflows where recall is prioritized over pure accuracy.
