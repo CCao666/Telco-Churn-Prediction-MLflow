@@ -75,81 +75,19 @@ To address imbalance, this project applies:
 This ensures the model prioritizes identifying churners (high recall) while controlling unnecessary intervention costs (precision tradeoff).
 
 
-## 🔍 Exploratory Data Analysis (EDA) – Key Findings
+## 🔍 Exploratory Data Analysis (EDA)
 
-Based on detailed EDA (see `notebooks/EDA.ipynb`), several strong behavioral patterns emerge:
+Detailed exploratory analysis is documented in `notebooks/EDA.ipynb`.
 
-### 1️⃣ Contract Type
+Key high-level observations:
 
-- **Month-to-Month contracts show significantly higher churn**
-- Long-term contracts (1–2 years) strongly reduce churn probability
+- Month-to-month contracts exhibit significantly higher churn.
+- Short-tenure customers are substantially more likely to leave.
+- Higher monthly charges increase churn probability.
+- Greater service adoption correlates with lower churn.
+- Certain payment methods (e.g., electronic check) show elevated churn rates.
 
-Interpretation:
-Customers with flexible contracts are less committed and more price-sensitive.
-
-
-### 2️⃣ Tenure
-
-- Short-tenure customers are at much higher risk
-- Tenure shows strong negative correlation with churn
-
-Interpretation:
-Customer loyalty increases over time.
-
-
-### 3️⃣ Monthly Charges
-
-- Higher monthly charges increase churn likelihood
-- Particularly strong effect within month-to-month contracts
-
-Interpretation:
-Pricing pressure drives churn in flexible subscription plans.
-
-
-### 4️⃣ Service Adoption
-
-- Customers subscribing to more services churn less
-- Clear negative relationship between total services and churn probability
-
-Interpretation:
-Higher product engagement increases switching cost.
-
-
-### 5️⃣ Payment Method
-
-- Electronic check users churn at significantly higher rates
-
-Interpretation:
-May reflect lower engagement or more price-sensitive segments.
-
-
-### 6️⃣ Internet Service Type
-
-- Fiber optic users show elevated churn compared to DSL users
-
-Interpretation:
-Could indicate higher expectations or competitive alternatives.
-
-
-### 7️⃣ Paperless Billing
-
-- Associated with slightly higher churn probability
-
-Interpretation:
-Digitally active users may be more responsive to pricing or competitor offers.
-
-
-## 🎯 Summary of Behavioral Drivers
-
-Churn in this dataset is primarily driven by:
-
-- Contract flexibility
-- Short customer tenure
-- High pricing exposure
-- Low service engagement
-- Certain payment behaviors
-
-These insights guide model design and threshold selection decisions.
+These behavioral insights informed feature engineering choices, imbalance handling, and threshold selection strategy.
 
 ## 🔁 Model Lifecycle
 
