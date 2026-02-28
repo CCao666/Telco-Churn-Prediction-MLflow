@@ -153,103 +153,45 @@ These insights guide model design and threshold selection decisions.
 
 ## 🔁 Model Lifecycle
 
-This project follows a structured, production-style ML lifecycle rather than a single-notebook experimentation approach.
+This project follows a structured ML workflow beyond notebook experimentation.
+
+### 1️⃣ Model Comparison  
+Multiple model families (LR, RF, SVM, XGBoost) were evaluated under a unified preprocessing pipeline.  
+All experiments were tracked using MLflow, logging hyperparameters and key metrics (AUC, F1, Precision, Recall).  
+**XGBoost consistently delivered the best performance.**
 
 
-### 1️⃣ Baseline & Multi-Model Comparison
+### 2️⃣ Imbalance-Aware Training  
+Given the 26.5% churn rate, models were trained with class weighting:  
+- `scale_pos_weight` (XGBoost)  
+- `class_weight='balanced'` (others)  
 
-Multiple model families were evaluated under a consistent preprocessing pipeline:
+This improves churn detection by penalizing false negatives more heavily.
 
-- Logistic Regression  
-- Random Forest  
-- Support Vector Machine (SVM)  
-- XGBoost  
-
-All experiments were tracked using **MLflow**, logging:
-
-- Hyperparameters  
-- AUC-ROC  
-- F1 Score  
-- Precision  
-- Recall  
-- Accuracy  
-
-Result:
-XGBoost consistently demonstrated superior ranking ability (AUC) and better recall–precision balance.
-
-
-### 2️⃣ Class-Weighted Training Strategy
-
-Given the imbalanced nature of the dataset (~26.5% churn rate), models were trained with class imbalance adjustments:
-
-- `scale_pos_weight` for XGBoost  
-- `class_weight='balanced'` for LR, RF, and SVM  
-
-This ensures churn misclassification (false negatives) carries higher penalty during training.
-
-
-### 3️⃣ Hyperparameter Optimization
-
-After identifying XGBoost as the strongest model family, a fine-grained hyperparameter search was conducted:
+### 3️⃣ XGBoost Optimization  
+A dedicated hyperparameter search refined:
 
 - `n_estimators`
 - `max_depth`
 - `learning_rate`
 - `subsample`
 
-All runs were logged under a dedicated MLflow experiment, enabling reproducible comparison and ranking.
+All runs were tracked in MLflow for reproducible comparison.
 
+### 4️⃣ Threshold Tuning  
+The final decision threshold was optimized to **0.51**, balancing recall (revenue protection) and precision (intervention cost control).
 
-### 4️⃣ Threshold Optimization
-
-Instead of relying on the default 0.5 classification threshold, the decision boundary was tuned based on predicted probabilities.
-
-The final optimized threshold is:
-
-**0.51**
-
-This threshold was selected to balance:
-
-- High recall (protect revenue by capturing churners)
-- Controlled precision (manage retention campaign cost)
-
-
-### 5️⃣ Model Registry & Governance
-
-The best-performing run across experiments was automatically identified and registered into the MLflow Model Registry.
-
-This simulates real-world model governance, including:
-
-- Version tracking  
-- Candidate tagging  
-- Experiment lineage traceability  
-
-
-### 6️⃣ Production Freeze
-
-After reviewing:
-
-- Confusion matrix tradeoffs  
-- Business impact of false positives vs false negatives  
-- Stability of evaluation metrics  
-
-A finalized model can be exported via:
+### 5️⃣ Model Registry & Production Export  
+The best run was registered in MLflow for version tracking.  
+After business validation, the finalized production model can be exported via:
 
 `src/save_best_model.py`
 
-The frozen production artifact is stored under:
+Stored under:
 
 `models/`
 
-This step represents deployment readiness after business validation.
 
+### 🔄 Workflow Summary
 
-### 🔄 End-to-End Flow
-
-EDA  
-→ Preprocessing  
-→ Multi-Model Evaluation  
-→ Hyperparameter Optimization  
-→ Threshold Tuning  
-→ Registry  
-→ Production Export
+EDA → Preprocessing → Model Comparison → Optimization → Threshold Tuning → Registry → Production Export
