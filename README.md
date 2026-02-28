@@ -211,16 +211,22 @@ Missed churners.
 
 ---
 
-### 🎯 Why These Metrics Matter
+### Why These Metrics Matter
 
-- **Recall (~0.81)** ensures most churners are captured, protecting revenue.
-- **Precision (~0.53)** controls over-spending on unnecessary retention efforts.
-- **F1 Score (0.637)** balances these two competing objectives.
-- **AUC (0.845)** confirms strong overall ranking ability.
+- **Recall (~0.81)** ensures most churners are detected, protecting revenue and reducing preventable cancellations.  
+- **Precision (~0.53)** controls over-spending on unnecessary retention efforts.  
+- **F1 Score (0.637)** balances recall and precision under class imbalance.  
+- **AUC (0.845)** confirms strong overall ranking and separation ability.
 
-Because churn intervention operates at a fixed threshold, evaluation focuses on precision–recall tradeoffs rather than accuracy alone.
+In churn management, missing a churner (false negative) directly results in lost revenue.  
+In contrast, a false positive represents an early warning — a customer flagged as high risk but who may not actually churn.
 
----
+While false positives increase outreach or discount cost, they are not purely wasted effort.  
+Proactive engagement (loyalty offers, personalized communication, service improvements) can strengthen customer relationships and reduce future churn risk.
+
+Therefore, in many retention scenarios, **an incorrect warning is often preferable to a missed churner**.
+
+Because intervention decisions operate at a fixed threshold, evaluation emphasizes precision–recall tradeoffs rather than accuracy alone.
 
 ### 🔎 Business Takeaway
 
