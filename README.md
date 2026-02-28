@@ -32,7 +32,8 @@ The repository is organized to reflect a clean, production-oriented machine lear
 │   ├── train.py                  # Unified training script with MLflow logging
 │   ├── hpo.py                    # Multi-model hyperparameter sweep
 │   ├── xgb_finetune.py           # Fine-grained XGBoost hyperparameter tuning
-│   └── register_model.py         # Automated best-model registration to MLflow Registry
+│   ├── register_model.py         # Automated best-model registration to MLflow Registry
+│   └── save_best_model.py        # Business-driven export of selected production model    
 │
 ├── mlruns/                       # MLflow experiment artifacts (ignored by Git)
 ├── mlflow.db                     # MLflow tracking database (ignored by Git)
