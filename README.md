@@ -61,7 +61,6 @@ Because churners represent a minority class, this is an **imbalanced classificat
 
 If not handled properly, models tend to over-predict the majority class (non-churn), leading to high accuracy but poor churn detection.
 
----
 
 ## ⚖️ Handling Class Imbalance
 
@@ -75,7 +74,6 @@ To address imbalance, this project applies:
 
 This ensures the model prioritizes identifying churners (high recall) while controlling unnecessary intervention costs (precision tradeoff).
 
----
 
 ## 🔍 Exploratory Data Analysis (EDA) – Key Findings
 
@@ -89,7 +87,6 @@ Based on detailed EDA (see `notebooks/EDA.ipynb`), several strong behavioral pat
 Interpretation:
 Customers with flexible contracts are less committed and more price-sensitive.
 
----
 
 ### 2️⃣ Tenure
 
@@ -99,7 +96,6 @@ Customers with flexible contracts are less committed and more price-sensitive.
 Interpretation:
 Customer loyalty increases over time.
 
----
 
 ### 3️⃣ Monthly Charges
 
@@ -109,7 +105,6 @@ Customer loyalty increases over time.
 Interpretation:
 Pricing pressure drives churn in flexible subscription plans.
 
----
 
 ### 4️⃣ Service Adoption
 
@@ -119,7 +114,6 @@ Pricing pressure drives churn in flexible subscription plans.
 Interpretation:
 Higher product engagement increases switching cost.
 
----
 
 ### 5️⃣ Payment Method
 
@@ -128,7 +122,6 @@ Higher product engagement increases switching cost.
 Interpretation:
 May reflect lower engagement or more price-sensitive segments.
 
----
 
 ### 6️⃣ Internet Service Type
 
@@ -137,7 +130,6 @@ May reflect lower engagement or more price-sensitive segments.
 Interpretation:
 Could indicate higher expectations or competitive alternatives.
 
----
 
 ### 7️⃣ Paperless Billing
 
@@ -146,7 +138,6 @@ Could indicate higher expectations or competitive alternatives.
 Interpretation:
 Digitally active users may be more responsive to pricing or competitor offers.
 
----
 
 ## 🎯 Summary of Behavioral Drivers
 
