@@ -57,6 +57,9 @@ This project uses the **Telco Customer Churn dataset**, where each row represent
 - Mix of numerical and categorical features
 - Behavioral and billing-related attributes
 
+![Churn Distribution](assets/Churn_Distribution.png)
+
+
 Because churners represent a minority class, this is an **imbalanced classification problem**.
 
 If not handled properly, models tend to over-predict the majority class (non-churn), leading to high accuracy but poor churn detection.
