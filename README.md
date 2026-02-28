@@ -135,16 +135,13 @@ Churn intervention decisions operate at a fixed threshold, making **F1 (precisio
 AUC was used to confirm separability, while F1 served as the primary selection criterion.
 
 
-### 4️⃣ Threshold Tuning
+### 4️⃣ Operating Threshold Selection
 
-Instead of relying on the default 0.5 cutoff, the classification threshold was optimized to:
+Rather than assuming the default 0.5 cutoff is optimal, 
+predicted probabilities were evaluated across thresholds to identify the best operating point.
 
-**0.51**
-
-This operating point balances:
-
-- High recall → revenue protection  
-- Controlled precision → retention cost management  
+The selected threshold (~0.5) maximized F1 under class-weighted training, 
+confirming that the model’s optimal decision boundary aligns closely with the default midpoint.
 
 ![Threshold Adjustment](assets/OptimizedThreshold.png)
 
