@@ -160,7 +160,10 @@ Multiple model families (LR, RF, SVM, XGBoost) were evaluated under a unified pr
 All experiments were tracked using MLflow, logging hyperparameters and key metrics (AUC, F1, Precision, Recall).  
 **XGBoost base model delivered best performance.**
 
+
+
 ![Model Comparison Experiment](assets/ModelComparison_Experiment.jpg)
+
 
 
 ### 2️⃣ Imbalance-Aware Training  
